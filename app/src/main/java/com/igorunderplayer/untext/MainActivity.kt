@@ -9,6 +9,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -29,7 +30,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.igorunderplayer.untext.ui.theme.UnTextTheme
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -132,11 +136,24 @@ class MainActivity : ComponentActivity() {
                                             modifier = Modifier.fillMaxSize()
                                         ){
                                             item {
+                                                Column (modifier = Modifier.padding(vertical = 16.dp)) {
+                                                    for (i in 1..currentText.lines().count()) {
+                                                        Text(
+                                                            modifier = Modifier.fillMaxHeight().padding(2.dp),
+                                                            style = MaterialTheme.typography.labelMedium,
+                                                            text = i.toString()
+                                                        )
+                                                    }
+                                                }
+
+                                            }
+                                            item {
                                                 TextField(
                                                     value = currentText,
                                                     onValueChange = { currentText = it },
                                                     singleLine = false,
-                                                    modifier = Modifier.fillMaxSize()
+                                                    modifier = Modifier.fillMaxSize(),
+                                                    textStyle = MaterialTheme.typography.bodyMedium
                                                 )
                                             }
                                         }
